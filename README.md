@@ -10,28 +10,28 @@ Moreno, the director of marketing and manager has set a clear goal: **Design mar
 ```{r install package}
 install.packages("tidyverse")
 ```
-[Screenshot 2024-06-27 184723](https://1drv.ms/i/c/2cc54bb9dec5ce43/EVZnGmF7k6xBgGjfvosTXGgBB4robpnAsusTDOZWv075fw?e=codJkL)
+![tidyverse package](https://github.com/Blessingdominic/Rproject/blob/main/tidyverse%20package.png)
 
 * Load packages by using the `library()` function. Use the conflicted package to manage conflicts.
 ```{r load packages}
 library(tidyverse)
 library(conflicted)
 ```
-
+![load data](https://github.com/Blessingdominic/Rproject/blob/main/load%20data.png)
 ## Import data  
 * Use `read_csv()` function to upload *[Divvy datasets](https://www.kaggle.com/datasets/blessingukpong1/cyclistic-data/data)* here
 ```{r load dataset}
 Q1_2019 <- read_csv("Divvy_Trips_2019_Q1.csv") 
 Q1_2020 <- read_csv("Divvy_Trips_2020_Q1.csv")
 ```
-
+![import data](https://github.com/Blessingdominic/Rproject/blob/main/import%20data.png)
 ## Wrangle data and combine into a single file  
 * Compare the column names of each of the files as they need to match perfectly before using a command to join them into one file
 ```{r}
 colnames(Q1_2019)
 colnames(Q1_2020)
 ```
-
+![column names](https://github.com/Blessingdominic/Rproject/blob/main/column%20names.png)
 * Rename Q1_2019 columns to make them consistent with Q1_2020
 ```{r}
 Q1_2019 <- rename(Q1_2019
@@ -53,7 +53,8 @@ Q1_2019 <- rename(Q1_2019
 str(Q1_2019)
 str(Q1_2020) 
 ```
-
+![data structure 1](https://github.com/Blessingdominic/Rproject/blob/main/data%20structure%201.png)
+![data structure 2](https://github.com/Blessingdominic/Rproject/blob/main/data%20structure%202.png)n b
 * Convert ride_id and rideable_type to character so that they can stack correctly. These columns are in character data types in the Q1_2020 data
 ```{r}
 Q1_2019 <-  mutate(Q1_2019, ride_id = as.character(ride_id)
