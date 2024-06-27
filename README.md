@@ -143,7 +143,7 @@ all_trips <- all_trips %>%
 ```{r}
 table(all_trips$member_casual)
 ```
-
+![table member casual](https://github.com/Blessingdominic/Rproject/blob/main/table%20member%20casual.png)
 * Add columns that list the date, month, day, and year of each ride.
 This will allow us to aggregate ride data for each month, day, or year ... before completing these operations we could only aggregate at the ride level
 ```{r}
@@ -171,7 +171,7 @@ all_trips$day_of_week <- format(as.Date(all_trips$date), "%A")
 ```{r}
 all_trips$ride_length <- difftime(all_trips$ended_at, all_trips$started_at)
 ```
-
+![all trips](https://github.com/Blessingdominic/Rproject/blob/main/aggregate.png)
 * Inspect the structure of the columns
 ```{r}
 str(all_trips)
@@ -188,7 +188,7 @@ The data frame includes a few hundred entries when bikes were taken out of docks
 all_trips %>% 
   dplyr::filter(ride_length < 1)
 ```
-
+![ride length < 1](https://github.com/Blessingdominic/Rproject/blob/main/ride_length%201.png)
 * We will create a new version of the dataframe (v2) since data is being removed
 ```{r}
 all_trips_v2 <- all_trips[!(all_trips$start_station_name == "HQ QR" | all_trips$ride_length < 0),]
@@ -221,28 +221,29 @@ shortest ride
 ```{r}
 summary(all_trips_v2$ride_length)
 ```
-
+![ride length summary](https://github.com/Blessingdominic/Rproject/blob/main/ride%20length%20summary.png)
 * Compare members and casual users
 ```{r}
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = mean)
 ```
-
+![aggregate, mean](https://github.com/Blessingdominic/Rproject/blob/main/aggregate%2C%20mean.png)
 ```{r}
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = median)
 ```
-
+![aggregate, median](https://github.com/Blessingdominic/Rproject/blob/main/aggregate%2C%20median.png)
 ```{r}
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = max)
 ```
-
+![aggregate, max](https://github.com/Blessingdominic/Rproject/blob/main/aggregate%2C%20max.png)
 ```{r}
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = min)
 ```
-
+![aggregate, min](https://github.com/Blessingdominic/Rproject/blob/main/aggregate%2C%20min%20-%20Copy.png)
 * See the average ride time by each day for members vs casual users
 ```{r}
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
 ```
+![aggregate, weekday unarranged](https://github.com/Blessingdominic/Rproject/blob/main/average%20ride%20time%20unarranged.png)
 Notice that the days of the week are out of order. Let's fix that.
 
 ```{r}
@@ -253,7 +254,7 @@ all_trips_v2$day_of_week <- ordered(all_trips_v2$day_of_week, levels=c("Sunday",
 ```{r}
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
 ```
-
+![aggregate, weekday arranged](https://github.com/Blessingdominic/Rproject/blob/main/average%20ride%20time%2C%20arranged.png)
 **Analyze ridership data by type and weekday**
 ```{r}
 all_trips_v2 %>% 
@@ -273,7 +274,7 @@ all_trips_v2 %>%
   ggplot(aes(x = weekday, y = number_of_rides, fill = member_casual)) +
   geom_col(position = "dodge")
 ```
-
+![number of rides vs weekday](https://github.com/Blessingdominic/Rproject/blob/main/no.%20of%20rides%20vs%20weekday.png)
 * Let's create a visualization for average duration
 ```{r}
 all_trips_v2 %>% 
@@ -285,7 +286,7 @@ all_trips_v2 %>%
   ggplot(aes(x = weekday, y = average_duration, fill = member_casual)) +
   geom_col(position = "dodge")
 ```
-
+![average duration vs weekday](https://github.com/Blessingdominic/Rproject/blob/main/average%20duration%20vs%20weekday.png)
 
 ## Key Findings
 Based on the given data, here are the insights and observations about the usage patterns of Cyclistic bike rides:
